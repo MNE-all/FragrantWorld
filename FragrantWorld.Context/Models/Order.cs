@@ -5,7 +5,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FragrantWorldWinFormsApp.Models
+namespace FragrantWorld.Context.Models
 {
     /// <summary>
     /// Сущность заказа

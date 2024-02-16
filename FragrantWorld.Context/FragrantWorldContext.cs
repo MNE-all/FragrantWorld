@@ -1,5 +1,4 @@
 ﻿using FragrantWorld.Context.Models;
-using FragrantWorldWinFormsApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FragrantWorld.Context

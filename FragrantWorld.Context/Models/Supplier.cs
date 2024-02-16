@@ -1,4 +1,4 @@
-﻿namespace FragrantWorldWinFormsApp.Models
+﻿namespace FragrantWorld.Context.Models
 {
     /// <summary>
     /// Сущность поставщика

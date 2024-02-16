@@ -34,6 +34,7 @@
             comboBoxDisountFilter = new ComboBox();
             label1 = new Label();
             panelUser = new Panel();
+            buttonCart = new Button();
             labelSignIn = new Label();
             labelFullName = new Label();
             labelEnterAs = new Label();
@@ -67,7 +68,7 @@
             // comboBoxDisountFilter
             // 
             comboBoxDisountFilter.FormattingEnabled = true;
-            comboBoxDisountFilter.Location = new Point(385, 20);
+            comboBoxDisountFilter.Location = new Point(293, 20);
             comboBoxDisountFilter.Name = "comboBoxDisountFilter";
             comboBoxDisountFilter.Size = new Size(121, 23);
             comboBoxDisountFilter.TabIndex = 2;
@@ -75,7 +76,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(291, 23);
+            label1.Location = new Point(199, 23);
             label1.Name = "label1";
             label1.Size = new Size(91, 15);
             label1.TabIndex = 1;
@@ -83,21 +84,33 @@
             // 
             // panelUser
             // 
+            panelUser.Controls.Add(buttonCart);
             panelUser.Controls.Add(labelSignIn);
             panelUser.Controls.Add(labelFullName);
             panelUser.Controls.Add(labelEnterAs);
             panelUser.Dock = DockStyle.Right;
-            panelUser.Location = new Point(546, 0);
+            panelUser.Location = new Point(494, 0);
             panelUser.Name = "panelUser";
-            panelUser.Size = new Size(288, 62);
+            panelUser.Size = new Size(340, 62);
             panelUser.TabIndex = 0;
+            // 
+            // buttonCart
+            // 
+            buttonCart.Location = new Point(253, 34);
+            buttonCart.Name = "buttonCart";
+            buttonCart.Size = new Size(75, 23);
+            buttonCart.TabIndex = 3;
+            buttonCart.Text = "Корзина";
+            buttonCart.UseVisualStyleBackColor = true;
+            buttonCart.Visible = false;
+            buttonCart.Click += buttonCart_Click;
             // 
             // labelSignIn
             // 
             labelSignIn.AutoSize = true;
             labelSignIn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             labelSignIn.ForeColor = SystemColors.HotTrack;
-            labelSignIn.Location = new Point(220, 23);
+            labelSignIn.Location = new Point(269, 13);
             labelSignIn.Name = "labelSignIn";
             labelSignIn.Size = new Size(43, 15);
             labelSignIn.TabIndex = 2;
@@ -146,7 +159,7 @@
             Name = "ProductForm";
             Text = "Список товаров";
             WindowState = FormWindowState.Maximized;
-            FormClosed += ProductForm_FormClosed;
+            FormClosing += ProductForm_FormClosing;
             panelControls.ResumeLayout(false);
             panelControls.PerformLayout();
             panelUser.ResumeLayout(false);
@@ -166,5 +179,6 @@
         private Label labelEnterAs;
         private ComboBox comboBoxDisountFilter;
         private Label label1;
+        private Button buttonCart;
     }
 }

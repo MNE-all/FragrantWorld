@@ -1,6 +1,6 @@
 using FragrantWorld.Context;
 using FragrantWorld.Context.Models;
-using FragrantWorldWinFormsApp.Models;
+using FragrantWorld.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 
 namespace FragrantWorld.Windows
@@ -24,7 +24,7 @@ namespace FragrantWorld.Windows
                     Role = db.Roles.OrderBy(x => x.Id).First(),
                 };
 
-                db.Users.Add(CurrentUser);
+                CurrentUser = db.Users.Add(CurrentUser).Entity;
                 db.SaveChanges();
             }
 
@@ -33,10 +33,10 @@ namespace FragrantWorld.Windows
         }
         public ProductForm(User user)
         {
-            CustomInit();
-            labelSignIn.Text = "Выйти";
-
             CurrentUser = user;
+            CustomInit();
+            ValidateCart();
+            labelSignIn.Text = "Выйти";
 
             labelFullName.Text = CurrentUser.Surname + " " +
                 CurrentUser.Name + " " +
@@ -48,7 +48,7 @@ namespace FragrantWorld.Windows
             InitializeComponent();
 
             ContextMenuStrip productContextMenu = new ContextMenuStrip();
-            var i = productContextMenu.Items.Add("Добавить к заказу");
+            productContextMenu.Items.Add("Добавить к заказу");
             productContextMenu.Items[0].Click += ProductAdd_Click;
 
             using (var db = new FragrantWorldContext())
@@ -104,11 +104,8 @@ namespace FragrantWorld.Windows
 
                 }
             }
-        }
 
-        private void ProductForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
+            ValidateCart();
         }
 
         private void flowLayoutPanel_Resize(object sender, EventArgs e)
@@ -135,6 +132,47 @@ namespace FragrantWorld.Windows
         {
             labelSignIn.ForeColor = Color.FromKnownColor(KnownColor.HotTrack);
 
+        }
+
+        private void ProductForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                using (var db = new FragrantWorldContext())
+                {
+                    if (db.Carts.Where(x => x.ClientId == CurrentUser.Id).Count() == 0 &&
+                        db.Orders.Where(x => x.ClientId == CurrentUser.Id).Count() == 0 &&
+                        CurrentUser.Name.Equals(CurrentUser.Login) && CurrentUser.Password.Contains(CurrentUser.Name))
+                    {
+                        db.Users.Remove(db.Users.First(x => x == CurrentUser));
+                        db.SaveChanges();
+                    }
+                }
+            }
+
+            Application.Exit();
+        }
+
+        private void buttonCart_Click(object sender, EventArgs e)
+        {
+            var cartForm = new CartForm(CurrentUser);
+            cartForm.ShowDialog();
+            ValidateCart();
+        }
+
+        private void ValidateCart()
+        {
+            using (var db = new FragrantWorldContext())
+            {
+                if (db.Carts.Where(x => x.ClientId == CurrentUser.Id).Count() > 0)
+                {
+                    buttonCart.Visible = true;
+                }
+                else
+                {
+                    buttonCart.Visible = false;
+                }
+            }
         }
     }
 }

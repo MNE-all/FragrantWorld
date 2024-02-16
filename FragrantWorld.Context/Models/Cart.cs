@@ -1,4 +1,4 @@
-﻿using FragrantWorldWinFormsApp.Models;
+﻿using FragrantWorld.Context.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace FragrantWorld.Context.Models

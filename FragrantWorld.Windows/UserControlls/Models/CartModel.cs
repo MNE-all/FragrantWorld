@@ -1,21 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FragrantWorld.Context.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace FragrantWorld.Context.Models
+namespace FragrantWorld.Windows.UserControlls.Models
 {
     /// <summary>
-    /// Сущность продукта
+    /// Модель для удобной работы с CartControl
     /// </summary>
-    public class Product
+    public class CartModel
     {
+        /// <summary>
+        /// Идентификатор
+        /// </summary>
+        public int Id { get; set; }
         /// <summary>
         /// Артикль
         /// </summary>
-        [Key]
         public string ArticleNumber { get; set; }
         /// <summary>
         /// Наименование
         /// </summary>
-        [Required]
         public string Name { get; set; }
         /// <summary>
         /// Описание
@@ -34,34 +37,13 @@ namespace FragrantWorld.Context.Models
         /// </summary>
         public float CurrentDiscount { get; set; }
         /// <summary>
-        /// Размер максимально возможной скидки
-        /// </summary>
-        public float MaxDiscount { get; set;}
-        /// <summary>
         /// <inheritdoc cref="Models.Manufacturer"/>
         /// </summary>
-        public Manufacturer Manufacturer { get; set;}
+        public Manufacturer Manufacturer { get; set; }
         /// <summary>
         /// Связь один к многим
         /// </summary>
         public int ManufacturerId { get; set; }
-
-        /// <summary>
-        /// <inheritdoc cref="Models.Supplier"/>
-        /// </summary>
-        public Supplier Supplier { get; set; }
-        /// <summary>
-        /// Связь один к многим
-        /// </summary>
-        public int SupplierId { get; set; }
-        /// <summary>
-        /// <inheritdoc cref="ProductCategory"/>
-        /// </summary>
-        public ProductCategory Category { get; set; }
-        /// <summary>
-        /// Связь один к многим
-        /// </summary>
-        public int CategoryId { get; set; }
         /// <summary>
         /// Количество единиц на складе
         /// </summary>
@@ -70,5 +52,8 @@ namespace FragrantWorld.Context.Models
         /// Адрес изображения
         /// </summary>
         public string ImageURL { get; set; }
+
+
+        public int Amount { get; set; }
     }
 }

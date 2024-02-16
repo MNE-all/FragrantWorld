@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FragrantWorldWinFormsApp.Models
+namespace FragrantWorld.Context.Models
 {
     /// <summary>
     /// Сущность пункта выдачи
@@ -32,5 +32,10 @@ namespace FragrantWorldWinFormsApp.Models
         [Required]
         public string Number { get; set; }
 
+
+        public override string ToString()
+        {
+            return Index + ", " + City + ", " + Street + ", " + Number;
+        }
     }
 }

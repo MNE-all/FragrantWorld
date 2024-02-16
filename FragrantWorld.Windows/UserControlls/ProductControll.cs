@@ -1,5 +1,5 @@
 ﻿using FragrantWorld.Context;
-using FragrantWorldWinFormsApp.Models;
+using FragrantWorld.Context.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,7 +47,7 @@ namespace FragrantWorld.Windows
         {
             switch (Discount)
             {
-                case > 4:
+                case > 15:
                     this.BackColor = ColorTranslator.FromHtml("#7fff00");
                     break;
                 default:
