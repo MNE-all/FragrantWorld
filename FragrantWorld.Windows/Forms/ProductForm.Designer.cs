@@ -30,6 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductForm));
             flowLayoutPanel = new FlowLayoutPanel();
+            panelControls = new Panel();
+            comboBoxDisountFilter = new ComboBox();
+            label1 = new Label();
+            panelUser = new Panel();
+            labelSignIn = new Label();
+            labelFullName = new Label();
+            labelEnterAs = new Label();
+            panel1 = new Panel();
+            panelControls.SuspendLayout();
+            panelUser.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel
@@ -38,25 +49,122 @@
             flowLayoutPanel.Dock = DockStyle.Fill;
             flowLayoutPanel.Location = new Point(0, 0);
             flowLayoutPanel.Name = "flowLayoutPanel";
-            flowLayoutPanel.Size = new Size(800, 450);
+            flowLayoutPanel.Size = new Size(834, 719);
             flowLayoutPanel.TabIndex = 0;
+            flowLayoutPanel.Resize += flowLayoutPanel_Resize;
+            // 
+            // panelControls
+            // 
+            panelControls.Controls.Add(comboBoxDisountFilter);
+            panelControls.Controls.Add(label1);
+            panelControls.Controls.Add(panelUser);
+            panelControls.Dock = DockStyle.Top;
+            panelControls.Location = new Point(0, 0);
+            panelControls.Name = "panelControls";
+            panelControls.Size = new Size(834, 62);
+            panelControls.TabIndex = 1;
+            // 
+            // comboBoxDisountFilter
+            // 
+            comboBoxDisountFilter.FormattingEnabled = true;
+            comboBoxDisountFilter.Location = new Point(385, 20);
+            comboBoxDisountFilter.Name = "comboBoxDisountFilter";
+            comboBoxDisountFilter.Size = new Size(121, 23);
+            comboBoxDisountFilter.TabIndex = 2;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(291, 23);
+            label1.Name = "label1";
+            label1.Size = new Size(91, 15);
+            label1.TabIndex = 1;
+            label1.Text = "Размер скидки:";
+            // 
+            // panelUser
+            // 
+            panelUser.Controls.Add(labelSignIn);
+            panelUser.Controls.Add(labelFullName);
+            panelUser.Controls.Add(labelEnterAs);
+            panelUser.Dock = DockStyle.Right;
+            panelUser.Location = new Point(546, 0);
+            panelUser.Name = "panelUser";
+            panelUser.Size = new Size(288, 62);
+            panelUser.TabIndex = 0;
+            // 
+            // labelSignIn
+            // 
+            labelSignIn.AutoSize = true;
+            labelSignIn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelSignIn.ForeColor = SystemColors.HotTrack;
+            labelSignIn.Location = new Point(220, 23);
+            labelSignIn.Name = "labelSignIn";
+            labelSignIn.Size = new Size(43, 15);
+            labelSignIn.TabIndex = 2;
+            labelSignIn.Text = "Войти";
+            labelSignIn.Click += labelSignIn_Click;
+            labelSignIn.MouseEnter += labelSignIn_MouseEnter;
+            labelSignIn.MouseLeave += labelSignIn_MouseLeave;
+            // 
+            // labelFullName
+            // 
+            labelFullName.AutoSize = true;
+            labelFullName.Location = new Point(5, 42);
+            labelFullName.Name = "labelFullName";
+            labelFullName.Size = new Size(139, 15);
+            labelFullName.TabIndex = 1;
+            labelFullName.Text = "Фамилия Имя Отчество";
+            // 
+            // labelEnterAs
+            // 
+            labelEnterAs.AutoSize = true;
+            labelEnterAs.Location = new Point(5, 16);
+            labelEnterAs.Name = "labelEnterAs";
+            labelEnterAs.Size = new Size(88, 15);
+            labelEnterAs.TabIndex = 0;
+            labelEnterAs.Text = "Вы вошли как:";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(flowLayoutPanel);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 62);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(834, 719);
+            panel1.TabIndex = 2;
             // 
             // ProductForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(flowLayoutPanel);
+            BackColor = Color.White;
+            ClientSize = new Size(834, 781);
+            Controls.Add(panel1);
+            Controls.Add(panelControls);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MinimumSize = new Size(850, 820);
             Name = "ProductForm";
             Text = "Список товаров";
+            WindowState = FormWindowState.Maximized;
             FormClosed += ProductForm_FormClosed;
+            panelControls.ResumeLayout(false);
+            panelControls.PerformLayout();
+            panelUser.ResumeLayout(false);
+            panelUser.PerformLayout();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private FlowLayoutPanel flowLayoutPanel;
-        private ProductControll productControll;
+        private Panel panelControls;
+        private Panel panel1;
+        private Panel panelUser;
+        private Label labelSignIn;
+        private Label labelFullName;
+        private Label labelEnterAs;
+        private ComboBox comboBoxDisountFilter;
+        private Label label1;
     }
 }

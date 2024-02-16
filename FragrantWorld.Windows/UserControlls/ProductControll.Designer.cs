@@ -52,6 +52,8 @@
             panel1.Padding = new Padding(10);
             panel1.Size = new Size(119, 149);
             panel1.TabIndex = 0;
+            panel1.MouseEnter += ProductControll_MouseEnter;
+            panel1.MouseLeave += ProductControll_MouseLeave;
             // 
             // pictureBox
             // 
@@ -65,6 +67,8 @@
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox.TabIndex = 0;
             pictureBox.TabStop = false;
+            pictureBox.MouseEnter += ProductControll_MouseEnter;
+            pictureBox.MouseLeave += ProductControll_MouseLeave;
             // 
             // panel2
             // 
@@ -74,6 +78,8 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(94, 149);
             panel2.TabIndex = 1;
+            panel2.MouseEnter += ProductControll_MouseEnter;
+            panel2.MouseLeave += ProductControll_MouseLeave;
             // 
             // labelDiscount
             // 
@@ -84,6 +90,8 @@
             labelDiscount.TabIndex = 0;
             labelDiscount.Text = "Размер скидки";
             labelDiscount.TextAlign = ContentAlignment.MiddleCenter;
+            labelDiscount.MouseEnter += ProductControll_MouseEnter;
+            labelDiscount.MouseLeave += ProductControll_MouseLeave;
             // 
             // panel3
             // 
@@ -96,6 +104,8 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(239, 149);
             panel3.TabIndex = 2;
+            panel3.MouseEnter += ProductControll_MouseEnter;
+            panel3.MouseLeave += ProductControll_MouseLeave;
             // 
             // labelPrice
             // 
@@ -105,6 +115,8 @@
             labelPrice.Size = new Size(38, 15);
             labelPrice.TabIndex = 3;
             labelPrice.Text = "Цена:";
+            labelPrice.MouseEnter += ProductControll_MouseEnter;
+            labelPrice.MouseLeave += ProductControll_MouseLeave;
             // 
             // labelManufacturer
             // 
@@ -114,6 +126,8 @@
             labelManufacturer.Size = new Size(95, 15);
             labelManufacturer.TabIndex = 2;
             labelManufacturer.Text = "Производитель:";
+            labelManufacturer.MouseEnter += ProductControll_MouseEnter;
+            labelManufacturer.MouseLeave += ProductControll_MouseLeave;
             // 
             // labelDescription
             // 
@@ -123,6 +137,8 @@
             labelDescription.Size = new Size(102, 15);
             labelDescription.TabIndex = 1;
             labelDescription.Text = "Описание товара";
+            labelDescription.MouseEnter += ProductControll_MouseEnter;
+            labelDescription.MouseLeave += ProductControll_MouseLeave;
             // 
             // labelName
             // 
@@ -133,16 +149,21 @@
             labelName.Size = new Size(136, 15);
             labelName.TabIndex = 0;
             labelName.Text = "Наименование товара";
+            labelName.MouseEnter += ProductControll_MouseEnter;
+            labelName.MouseLeave += ProductControll_MouseLeave;
             // 
             // ProductControll
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.GrayText;
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "ProductControll";
             Size = new Size(452, 149);
+            MouseEnter += ProductControll_MouseEnter;
+            MouseLeave += ProductControll_MouseLeave;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             panel2.ResumeLayout(false);

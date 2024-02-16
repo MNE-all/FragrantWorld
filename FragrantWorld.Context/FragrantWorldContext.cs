@@ -1,4 +1,5 @@
-﻿using FragrantWorldWinFormsApp.Models;
+﻿using FragrantWorld.Context.Models;
+using FragrantWorldWinFormsApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FragrantWorld.Context
@@ -14,6 +15,7 @@ namespace FragrantWorld.Context
         public DbSet<PickUpPoint> PickUpPoints { get; set; }
         public DbSet<UnitOfMeasurement> UnitsOfMeasurement { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +36,8 @@ namespace FragrantWorld.Context
 
             modelBuilder.Entity<PickUpPoint>().HasIndex(u => u.Index).IsUnique();
             modelBuilder.Entity<Order>().HasKey(x => new {x.Number, x.ProductArticleNumber});
+
+            modelBuilder.Entity<Cart>().HasIndex(x => new { x.ProductArticleNumber, x.ClientId }).IsUnique();
             base.OnModelCreating(modelBuilder);
         }
     }

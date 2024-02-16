@@ -4,6 +4,7 @@ using FragrantWorld.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FragrantWorld.Context.Migrations
 {
     [DbContext(typeof(FragrantWorldContext))]
-    partial class FragrantWorldContextModelSnapshot : ModelSnapshot
+    [Migration("20240216154205_AddCart")]
+    partial class AddCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,29 +26,18 @@ namespace FragrantWorld.Context.Migrations
 
             modelBuilder.Entity("FragrantWorld.Context.Models.Cart", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductArticleNumber")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductArticleNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProductArticleNumber", "ClientId");
 
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("ProductArticleNumber", "ClientId")
-                        .IsUnique()
-                        .HasFilter("[ClientId] IS NOT NULL");
 
                     b.ToTable("Carts");
                 });
@@ -298,6 +289,7 @@ namespace FragrantWorld.Context.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Patronomyc")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")
@@ -321,7 +313,9 @@ namespace FragrantWorld.Context.Migrations
                 {
                     b.HasOne("FragrantWorldWinFormsApp.Models.User", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientId");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FragrantWorldWinFormsApp.Models.Product", "Product")
                         .WithMany()

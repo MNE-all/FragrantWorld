@@ -15,8 +15,7 @@ namespace FragrantWorldWinFormsApp.Models
         /// <summary>
         /// Отчество
         /// </summary>
-        [Required]
-        public string Patronomyc { get; set; }
+        public string? Patronomyc { get; set; }
         /// <summary>
         /// Логин
         /// </summary>

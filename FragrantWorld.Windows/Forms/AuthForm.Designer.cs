@@ -38,13 +38,13 @@
             buttonRegister = new Button();
             groupBoxAuth = new GroupBox();
             panel1 = new Panel();
+            buttonGuestEnter = new Button();
             buttonRefreshCaptcha = new Button();
             label3 = new Label();
             textBoxCaptcha = new TextBox();
             groupBoxCapthca = new GroupBox();
             flowLayoutPanel = new FlowLayoutPanel();
             groupBox2 = new GroupBox();
-            buttonGuestEnter = new Button();
             groupBoxAuth.SuspendLayout();
             panel1.SuspendLayout();
             groupBoxCapthca.SuspendLayout();
@@ -131,6 +131,16 @@
             panel1.Size = new Size(364, 68);
             panel1.TabIndex = 9;
             // 
+            // buttonGuestEnter
+            // 
+            buttonGuestEnter.Location = new Point(239, 24);
+            buttonGuestEnter.Name = "buttonGuestEnter";
+            buttonGuestEnter.Size = new Size(113, 23);
+            buttonGuestEnter.TabIndex = 0;
+            buttonGuestEnter.Text = "Войти как гость";
+            buttonGuestEnter.UseVisualStyleBackColor = true;
+            buttonGuestEnter.Click += buttonGuestEnter_Click;
+            // 
             // buttonRefreshCaptcha
             // 
             buttonRefreshCaptcha.Location = new Point(208, 22);
@@ -194,16 +204,6 @@
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             // 
-            // buttonGuestEnter
-            // 
-            buttonGuestEnter.Location = new Point(239, 24);
-            buttonGuestEnter.Name = "buttonGuestEnter";
-            buttonGuestEnter.Size = new Size(113, 23);
-            buttonGuestEnter.TabIndex = 0;
-            buttonGuestEnter.Text = "Войти как гость";
-            buttonGuestEnter.UseVisualStyleBackColor = true;
-            buttonGuestEnter.Click += buttonGuestEnter_Click;
-            // 
             // AuthForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -219,6 +219,7 @@
             Name = "AuthForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Авторизация";
+            FormClosed += AuthForm_FormClosed;
             groupBoxAuth.ResumeLayout(false);
             groupBoxAuth.PerformLayout();
             panel1.ResumeLayout(false);

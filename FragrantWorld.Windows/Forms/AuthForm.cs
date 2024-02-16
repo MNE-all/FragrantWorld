@@ -31,7 +31,7 @@ namespace FragrantWorld.Windows
                 {
                     if (user.Password == textBoxPassword.Text)
                     {
-                        var productForm = new ProductForm();
+                        var productForm = new ProductForm(user);
                         productForm.Show(this);
                         Hide();
                     }
@@ -52,6 +52,11 @@ namespace FragrantWorld.Windows
             var productForm = new ProductForm();
             productForm.Show(this);
             Hide();
+        }
+
+        private void AuthForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
