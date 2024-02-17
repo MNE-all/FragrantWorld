@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FragrantWorldWinFormsApp.Models
+namespace FragrantWorld.Context.Models
 {
     /// <summary>
     /// Сущность продукта
@@ -70,5 +70,10 @@ namespace FragrantWorldWinFormsApp.Models
         /// Адрес изображения
         /// </summary>
         public string ImageURL { get; set; }
+
+        public override string ToString()
+        {
+            return Name + ", " + ArticleNumber + ", " + (Price * (100 - (decimal)CurrentDiscount)/100) + " руб. за шт.";
+        }
     }
 }

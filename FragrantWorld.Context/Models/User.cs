@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FragrantWorldWinFormsApp.Models
+namespace FragrantWorld.Context.Models
 {
     /// <summary>
     /// Сущность пользователя
@@ -15,8 +15,7 @@ namespace FragrantWorldWinFormsApp.Models
         /// <summary>
         /// Отчество
         /// </summary>
-        [Required]
-        public string Patronomyc { get; set; }
+        public string? Patronomyc { get; set; }
         /// <summary>
         /// Логин
         /// </summary>
@@ -31,6 +30,10 @@ namespace FragrantWorldWinFormsApp.Models
         /// Роль
         /// </summary>
         public Role Role { get; set; }
+        /// <summary>
+        /// Связь один ко многим
+        /// </summary>
+        public int RoleId { get; set; }
 
     }
 }

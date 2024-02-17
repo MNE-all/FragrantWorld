@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FragrantWorldWinFormsApp.Models
+namespace FragrantWorld.Context.Models
 {
     /// <summary>
     /// Базовый простой класс, содержащий: <inheritdoc cref="Id"/>, <inheritdoc cref="Name"/>

@@ -21,6 +21,8 @@ namespace FragrantWorld.Windows
             enterCounter++;
             if (enterCounter == 2)
             {
+                buttonEnter.Enabled = false;
+
                 this.Height += this.groupBoxCapthca.Height;
             }
 
@@ -31,7 +33,7 @@ namespace FragrantWorld.Windows
                 {
                     if (user.Password == textBoxPassword.Text)
                     {
-                        var productForm = new ProductForm();
+                        var productForm = new ProductForm(user);
                         productForm.Show(this);
                         Hide();
                     }
@@ -52,6 +54,23 @@ namespace FragrantWorld.Windows
             var productForm = new ProductForm();
             productForm.Show(this);
             Hide();
+        }
+
+        private void AuthForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void textBoxCaptcha_TextChanged(object sender, EventArgs e)
+        {
+            buttonEnter.Enabled = false;
+            if (int.TryParse(textBoxCaptcha.Text, out var answer))
+            {
+                if (captcha.ValidateValue(answer))
+                {
+                    buttonEnter.Enabled = true;
+                }
+            }
         }
     }
 }

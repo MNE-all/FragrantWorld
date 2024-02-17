@@ -1,6 +1,6 @@
-﻿namespace FragrantWorld.Windows
+﻿namespace FragrantWorld.Windows.UserControlls
 {
-    partial class ProductControll
+    partial class OrderUpdateControl
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -28,10 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            labelDiscount = new Label();
             panel1 = new Panel();
             pictureBox = new PictureBox();
             panel2 = new Panel();
-            labelDiscount = new Label();
+            buttonMinus = new Button();
+            buttonPlus = new Button();
+            labelAmount = new Label();
+            labelTotalPrice = new Label();
+            label1 = new Label();
             panel3 = new Panel();
             labelPrice = new Label();
             labelManufacturer = new Label();
@@ -43,6 +48,16 @@
             panel3.SuspendLayout();
             SuspendLayout();
             // 
+            // labelDiscount
+            // 
+            labelDiscount.AutoSize = true;
+            labelDiscount.Location = new Point(444, 125);
+            labelDiscount.Name = "labelDiscount";
+            labelDiscount.Size = new Size(88, 15);
+            labelDiscount.TabIndex = 0;
+            labelDiscount.Text = "Размер скидки";
+            labelDiscount.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // panel1
             // 
             panel1.Controls.Add(pictureBox);
@@ -50,10 +65,8 @@
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(10);
-            panel1.Size = new Size(119, 149);
-            panel1.TabIndex = 0;
-            panel1.MouseEnter += ProductControll_MouseEnter;
-            panel1.MouseLeave += ProductControll_MouseLeave;
+            panel1.Size = new Size(119, 150);
+            panel1.TabIndex = 6;
             // 
             // pictureBox
             // 
@@ -63,107 +76,130 @@
             pictureBox.Margin = new Padding(30);
             pictureBox.Name = "pictureBox";
             pictureBox.Padding = new Padding(10);
-            pictureBox.Size = new Size(99, 129);
+            pictureBox.Size = new Size(99, 130);
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox.TabIndex = 0;
             pictureBox.TabStop = false;
-            pictureBox.MouseEnter += ProductControll_MouseEnter;
-            pictureBox.MouseLeave += ProductControll_MouseLeave;
             // 
             // panel2
             // 
-            panel2.Controls.Add(labelDiscount);
+            panel2.Controls.Add(buttonMinus);
+            panel2.Controls.Add(buttonPlus);
+            panel2.Controls.Add(labelAmount);
+            panel2.Controls.Add(labelTotalPrice);
+            panel2.Controls.Add(label1);
             panel2.Dock = DockStyle.Right;
-            panel2.Location = new Point(358, 0);
+            panel2.Location = new Point(538, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(94, 149);
-            panel2.TabIndex = 1;
-            panel2.MouseEnter += ProductControll_MouseEnter;
-            panel2.MouseLeave += ProductControll_MouseLeave;
+            panel2.Size = new Size(312, 150);
+            panel2.TabIndex = 7;
             // 
-            // labelDiscount
+            // buttonMinus
             // 
-            labelDiscount.AutoSize = true;
-            labelDiscount.Location = new Point(3, 66);
-            labelDiscount.Name = "labelDiscount";
-            labelDiscount.Size = new Size(88, 15);
-            labelDiscount.TabIndex = 0;
-            labelDiscount.Text = "Размер скидки";
-            labelDiscount.TextAlign = ContentAlignment.MiddleCenter;
-            labelDiscount.MouseEnter += ProductControll_MouseEnter;
-            labelDiscount.MouseLeave += ProductControll_MouseLeave;
+            buttonMinus.Location = new Point(118, 81);
+            buttonMinus.Name = "buttonMinus";
+            buttonMinus.Size = new Size(50, 23);
+            buttonMinus.TabIndex = 6;
+            buttonMinus.Text = "-";
+            buttonMinus.UseVisualStyleBackColor = true;
+            buttonMinus.Click += buttonMinus_Click;
+            // 
+            // buttonPlus
+            // 
+            buttonPlus.Location = new Point(118, 37);
+            buttonPlus.Name = "buttonPlus";
+            buttonPlus.Size = new Size(50, 23);
+            buttonPlus.TabIndex = 5;
+            buttonPlus.Text = "+";
+            buttonPlus.UseVisualStyleBackColor = true;
+            buttonPlus.Click += buttonPlus_Click;
+            // 
+            // labelAmount
+            // 
+            labelAmount.AutoSize = true;
+            labelAmount.Location = new Point(135, 63);
+            labelAmount.Name = "labelAmount";
+            labelAmount.Size = new Size(13, 15);
+            labelAmount.TabIndex = 4;
+            labelAmount.Text = "0";
+            // 
+            // labelTotalPrice
+            // 
+            labelTotalPrice.AutoSize = true;
+            labelTotalPrice.Location = new Point(186, 63);
+            labelTotalPrice.Name = "labelTotalPrice";
+            labelTotalPrice.Size = new Size(48, 15);
+            labelTotalPrice.TabIndex = 3;
+            labelTotalPrice.Text = "Сумма:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(23, 63);
+            label1.Name = "label1";
+            label1.Size = new Size(75, 15);
+            label1.TabIndex = 2;
+            label1.Text = "Количество:";
             // 
             // panel3
             // 
             panel3.Controls.Add(labelPrice);
             panel3.Controls.Add(labelManufacturer);
             panel3.Controls.Add(labelDescription);
+            panel3.Controls.Add(labelDiscount);
             panel3.Controls.Add(labelName);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(119, 0);
+            panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(239, 149);
-            panel3.TabIndex = 2;
-            panel3.MouseEnter += ProductControll_MouseEnter;
-            panel3.MouseLeave += ProductControll_MouseLeave;
+            panel3.Size = new Size(850, 150);
+            panel3.TabIndex = 8;
             // 
             // labelPrice
             // 
             labelPrice.AutoSize = true;
-            labelPrice.Location = new Point(22, 103);
+            labelPrice.Location = new Point(142, 103);
             labelPrice.Name = "labelPrice";
             labelPrice.Size = new Size(38, 15);
             labelPrice.TabIndex = 3;
             labelPrice.Text = "Цена:";
-            labelPrice.MouseEnter += ProductControll_MouseEnter;
-            labelPrice.MouseLeave += ProductControll_MouseLeave;
             // 
             // labelManufacturer
             // 
             labelManufacturer.AutoSize = true;
-            labelManufacturer.Location = new Point(22, 78);
+            labelManufacturer.Location = new Point(142, 79);
             labelManufacturer.Name = "labelManufacturer";
             labelManufacturer.Size = new Size(95, 15);
             labelManufacturer.TabIndex = 2;
             labelManufacturer.Text = "Производитель:";
-            labelManufacturer.MouseEnter += ProductControll_MouseEnter;
-            labelManufacturer.MouseLeave += ProductControll_MouseLeave;
             // 
             // labelDescription
             // 
             labelDescription.AutoSize = true;
-            labelDescription.Location = new Point(22, 54);
+            labelDescription.Location = new Point(142, 55);
             labelDescription.Name = "labelDescription";
             labelDescription.Size = new Size(102, 15);
             labelDescription.TabIndex = 1;
             labelDescription.Text = "Описание товара";
-            labelDescription.MouseEnter += ProductControll_MouseEnter;
-            labelDescription.MouseLeave += ProductControll_MouseLeave;
             // 
             // labelName
             // 
             labelName.AutoSize = true;
             labelName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelName.Location = new Point(22, 29);
+            labelName.Location = new Point(142, 30);
             labelName.Name = "labelName";
             labelName.Size = new Size(136, 15);
             labelName.TabIndex = 0;
             labelName.Text = "Наименование товара";
-            labelName.MouseEnter += ProductControll_MouseEnter;
-            labelName.MouseLeave += ProductControll_MouseLeave;
             // 
-            // ProductControll
+            // OrderUpdateControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.GrayText;
-            Controls.Add(panel3);
-            Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "ProductControll";
-            Size = new Size(452, 149);
-            MouseEnter += ProductControll_MouseEnter;
-            MouseLeave += ProductControll_MouseLeave;
+            Controls.Add(panel2);
+            Controls.Add(panel3);
+            Name = "OrderUpdateControl";
+            Size = new Size(850, 150);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             panel2.ResumeLayout(false);
@@ -175,10 +211,15 @@
 
         #endregion
 
+        private Label labelDiscount;
         private Panel panel1;
         private PictureBox pictureBox;
         private Panel panel2;
-        private Label labelDiscount;
+        private Button buttonMinus;
+        private Button buttonPlus;
+        private Label labelAmount;
+        private Label labelTotalPrice;
+        private Label label1;
         private Panel panel3;
         private Label labelPrice;
         private Label labelManufacturer;

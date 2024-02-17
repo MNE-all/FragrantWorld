@@ -4,6 +4,7 @@ using FragrantWorld.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FragrantWorld.Context.Migrations
 {
     [DbContext(typeof(FragrantWorldContext))]
-    partial class FragrantWorldContextModelSnapshot : ModelSnapshot
+    [Migration("20240216155904_EditCartUnique")]
+    partial class EditCartUnique
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,7 @@ namespace FragrantWorld.Context.Migrations
                     b.ToTable("Carts");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.Manufacturer", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.Manufacturer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,7 +73,7 @@ namespace FragrantWorld.Context.Migrations
                     b.ToTable("Manufacturers");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.Order", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.Order", b =>
                 {
                     b.Property<int>("Number")
                         .HasColumnType("int");
@@ -111,7 +113,7 @@ namespace FragrantWorld.Context.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.PickUpPoint", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.PickUpPoint", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,7 +145,7 @@ namespace FragrantWorld.Context.Migrations
                     b.ToTable("PickUpPoints");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.Product", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.Product", b =>
                 {
                     b.Property<string>("ArticleNumber")
                         .HasColumnType("nvarchar(450)");
@@ -197,7 +199,7 @@ namespace FragrantWorld.Context.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.ProductCategory", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.ProductCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -217,7 +219,7 @@ namespace FragrantWorld.Context.Migrations
                     b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.Role", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -237,7 +239,7 @@ namespace FragrantWorld.Context.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.Supplier", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.Supplier", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -257,7 +259,7 @@ namespace FragrantWorld.Context.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.UnitOfMeasurement", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.UnitOfMeasurement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -277,7 +279,7 @@ namespace FragrantWorld.Context.Migrations
                     b.ToTable("UnitsOfMeasurement");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.User", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -298,6 +300,7 @@ namespace FragrantWorld.Context.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Patronomyc")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")
@@ -319,11 +322,11 @@ namespace FragrantWorld.Context.Migrations
 
             modelBuilder.Entity("FragrantWorld.Context.Models.Cart", b =>
                 {
-                    b.HasOne("FragrantWorld.Context.Models.User", "Client")
+                    b.HasOne("FragrantWorldWinFormsApp.Models.User", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId");
 
-                    b.HasOne("FragrantWorld.Context.Models.Product", "Product")
+                    b.HasOne("FragrantWorldWinFormsApp.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductArticleNumber")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -334,19 +337,19 @@ namespace FragrantWorld.Context.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.Order", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.Order", b =>
                 {
-                    b.HasOne("FragrantWorld.Context.Models.User", "Client")
+                    b.HasOne("FragrantWorldWinFormsApp.Models.User", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId");
 
-                    b.HasOne("FragrantWorld.Context.Models.PickUpPoint", "PickUpPoint")
+                    b.HasOne("FragrantWorldWinFormsApp.Models.PickUpPoint", "PickUpPoint")
                         .WithMany()
                         .HasForeignKey("PickUpPointId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FragrantWorld.Context.Models.Product", "Product")
+                    b.HasOne("FragrantWorldWinFormsApp.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductArticleNumber")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -359,27 +362,27 @@ namespace FragrantWorld.Context.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.Product", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.Product", b =>
                 {
-                    b.HasOne("FragrantWorld.Context.Models.ProductCategory", "Category")
+                    b.HasOne("FragrantWorldWinFormsApp.Models.ProductCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FragrantWorld.Context.Models.Manufacturer", "Manufacturer")
+                    b.HasOne("FragrantWorldWinFormsApp.Models.Manufacturer", "Manufacturer")
                         .WithMany()
                         .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FragrantWorld.Context.Models.Supplier", "Supplier")
+                    b.HasOne("FragrantWorldWinFormsApp.Models.Supplier", "Supplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FragrantWorld.Context.Models.UnitOfMeasurement", "UnitOfMeasurement")
+                    b.HasOne("FragrantWorldWinFormsApp.Models.UnitOfMeasurement", "UnitOfMeasurement")
                         .WithMany()
                         .HasForeignKey("UnitOfMeasurementId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -394,9 +397,9 @@ namespace FragrantWorld.Context.Migrations
                     b.Navigation("UnitOfMeasurement");
                 });
 
-            modelBuilder.Entity("FragrantWorld.Context.Models.User", b =>
+            modelBuilder.Entity("FragrantWorldWinFormsApp.Models.User", b =>
                 {
-                    b.HasOne("FragrantWorld.Context.Models.Role", "Role")
+                    b.HasOne("FragrantWorldWinFormsApp.Models.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
