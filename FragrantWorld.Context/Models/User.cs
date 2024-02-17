@@ -30,6 +30,10 @@ namespace FragrantWorld.Context.Models
         /// Роль
         /// </summary>
         public Role Role { get; set; }
+        /// <summary>
+        /// Связь один ко многим
+        /// </summary>
+        public int RoleId { get; set; }
 
     }
 }

@@ -12,8 +12,6 @@ namespace FragrantWorld.Windows
         public List<Product> Products = new List<Product>();
         public ProductForm()
         {
-            CustomInit();
-
             using (var db = new FragrantWorldContext())
             {
                 var userId = db.Users.OrderBy(u => u.Id).Last().Id + 1;
@@ -29,6 +27,9 @@ namespace FragrantWorld.Windows
                 CurrentUser = db.Users.Add(CurrentUser).Entity;
                 db.SaveChanges();
             }
+
+            CustomInit();
+
 
             labelEnterAs.Visible = false;
             labelFullName.Visible = false;
@@ -54,7 +55,10 @@ namespace FragrantWorld.Windows
             }
             ShowProducts();
 
-
+            if (CurrentUser.RoleId > 1)
+            {
+                buttonOrders.Visible = true;
+            }
 
             comboBoxDisountFilter.Items.Add("Все диапозоны");
             comboBoxDisountFilter.Items.Add("0-9,99%");
@@ -218,12 +222,20 @@ namespace FragrantWorld.Windows
                         Products = db.Products.Where(x => x.CurrentDiscount >= 15).ToList();
                         break;
                 }
-            }
-            if (textBoxNameFind.Text != string.Empty)
-            {
-                Products = Products.Where(x => x.Name.Contains(textBoxNameFind.Text)).ToList();
+
+                if (textBoxNameFind.Text != string.Empty)
+                {
+                    Products = Products.Where(x => x.Name.Contains(textBoxNameFind.Text)).ToList();
+                }
+                labelResultCount.Text = Products.Count().ToString() + " из " + db.Products.Count();
             }
             ShowProducts();
+        }
+
+        private void buttonOrders_Click(object sender, EventArgs e)
+        {
+            var ordersForm = new OrdersForm(CurrentUser);
+            ordersForm.ShowDialog();
         }
     }
 }

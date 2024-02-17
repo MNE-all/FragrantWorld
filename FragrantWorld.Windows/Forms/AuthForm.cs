@@ -21,6 +21,8 @@ namespace FragrantWorld.Windows
             enterCounter++;
             if (enterCounter == 2)
             {
+                buttonEnter.Enabled = false;
+
                 this.Height += this.groupBoxCapthca.Height;
             }
 
@@ -57,6 +59,18 @@ namespace FragrantWorld.Windows
         private void AuthForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void textBoxCaptcha_TextChanged(object sender, EventArgs e)
+        {
+            buttonEnter.Enabled = false;
+            if (int.TryParse(textBoxCaptcha.Text, out var answer))
+            {
+                if (captcha.ValidateValue(answer))
+                {
+                    buttonEnter.Enabled = true;
+                }
+            }
         }
     }
 }

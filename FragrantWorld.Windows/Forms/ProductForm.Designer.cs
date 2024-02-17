@@ -31,16 +31,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductForm));
             flowLayoutPanel = new FlowLayoutPanel();
             panelControls = new Panel();
+            labelResultCount = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            textBoxNameFind = new TextBox();
             comboBoxDisountFilter = new ComboBox();
             label1 = new Label();
             panelUser = new Panel();
+            buttonOrders = new Button();
             buttonCart = new Button();
             labelSignIn = new Label();
             labelFullName = new Label();
             labelEnterAs = new Label();
             panel1 = new Panel();
-            textBoxNameFind = new TextBox();
-            label2 = new Label();
             panelControls.SuspendLayout();
             panelUser.SuspendLayout();
             panel1.SuspendLayout();
@@ -58,6 +61,8 @@
             // 
             // panelControls
             // 
+            panelControls.Controls.Add(labelResultCount);
+            panelControls.Controls.Add(label3);
             panelControls.Controls.Add(label2);
             panelControls.Controls.Add(textBoxNameFind);
             panelControls.Controls.Add(comboBoxDisountFilter);
@@ -69,10 +74,45 @@
             panelControls.Size = new Size(834, 62);
             panelControls.TabIndex = 1;
             // 
+            // labelResultCount
+            // 
+            labelResultCount.AutoSize = true;
+            labelResultCount.Location = new Point(408, 27);
+            labelResultCount.Name = "labelResultCount";
+            labelResultCount.Size = new Size(43, 15);
+            labelResultCount.TabIndex = 6;
+            labelResultCount.Text = "0 из 50";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(370, 6);
+            label3.Name = "label3";
+            label3.Size = new Size(118, 15);
+            label3.TabIndex = 5;
+            label3.Text = "Кол-во результатов:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 6);
+            label2.Name = "label2";
+            label2.Size = new Size(150, 15);
+            label2.TabIndex = 4;
+            label2.Text = "Поиск по наименованию:";
+            // 
+            // textBoxNameFind
+            // 
+            textBoxNameFind.Location = new Point(12, 24);
+            textBoxNameFind.Name = "textBoxNameFind";
+            textBoxNameFind.Size = new Size(196, 23);
+            textBoxNameFind.TabIndex = 3;
+            textBoxNameFind.TextChanged += textBoxNameFind_TextChanged;
+            // 
             // comboBoxDisountFilter
             // 
             comboBoxDisountFilter.FormattingEnabled = true;
-            comboBoxDisountFilter.Location = new Point(357, 20);
+            comboBoxDisountFilter.Location = new Point(226, 24);
             comboBoxDisountFilter.Name = "comboBoxDisountFilter";
             comboBoxDisountFilter.Size = new Size(121, 23);
             comboBoxDisountFilter.TabIndex = 2;
@@ -81,7 +121,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(263, 23);
+            label1.Location = new Point(226, 6);
             label1.Name = "label1";
             label1.Size = new Size(91, 15);
             label1.TabIndex = 1;
@@ -89,6 +129,7 @@
             // 
             // panelUser
             // 
+            panelUser.Controls.Add(buttonOrders);
             panelUser.Controls.Add(buttonCart);
             panelUser.Controls.Add(labelSignIn);
             panelUser.Controls.Add(labelFullName);
@@ -98,6 +139,17 @@
             panelUser.Name = "panelUser";
             panelUser.Size = new Size(340, 62);
             panelUser.TabIndex = 0;
+            // 
+            // buttonOrders
+            // 
+            buttonOrders.Location = new Point(172, 12);
+            buttonOrders.Name = "buttonOrders";
+            buttonOrders.Size = new Size(75, 23);
+            buttonOrders.TabIndex = 4;
+            buttonOrders.Text = "Заказы";
+            buttonOrders.UseVisualStyleBackColor = true;
+            buttonOrders.Visible = false;
+            buttonOrders.Click += buttonOrders_Click;
             // 
             // buttonCart
             // 
@@ -151,23 +203,6 @@
             panel1.Size = new Size(834, 719);
             panel1.TabIndex = 2;
             // 
-            // textBoxNameFind
-            // 
-            textBoxNameFind.Location = new Point(12, 24);
-            textBoxNameFind.Name = "textBoxNameFind";
-            textBoxNameFind.Size = new Size(196, 23);
-            textBoxNameFind.TabIndex = 3;
-            textBoxNameFind.TextChanged += textBoxNameFind_TextChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 6);
-            label2.Name = "label2";
-            label2.Size = new Size(98, 15);
-            label2.TabIndex = 4;
-            label2.Text = "Поиск по имени";
-            // 
             // ProductForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -204,5 +239,8 @@
         private Button buttonCart;
         private Label label2;
         private TextBox textBoxNameFind;
+        private Label labelResultCount;
+        private Label label3;
+        private Button buttonOrders;
     }
 }

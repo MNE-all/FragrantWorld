@@ -32,7 +32,7 @@ namespace FragrantWorld.Windows.Forms
             ShowCartItems();
         }
 
-        private void ShowCartItems()
+        public void ShowCartItems()
         {
             flowLayoutPanel.Controls.Clear();
             TotalSum = 0;
@@ -70,7 +70,6 @@ namespace FragrantWorld.Windows.Forms
                         Name = product.Name,
                         Price = product.Price,
                         StorageAmount = product.StorageAmount,
-                        UnitOfMeasurement = product.UnitOfMeasurement,
                     });
                     TotalSum += product.Price * (100 - (decimal)product.CurrentDiscount) / 100 * cart.Amount;
                 }

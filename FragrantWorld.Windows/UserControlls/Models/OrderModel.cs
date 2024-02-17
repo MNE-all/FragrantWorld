@@ -1,17 +1,21 @@
 ﻿using FragrantWorld.Context.Models;
-using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FragrantWorld.Windows.UserControlls.Models
 {
     /// <summary>
-    /// Модель для удобной работы с CartControl
+    /// Модель для удобной работы с OrderControl
     /// </summary>
-    public class CartModel
+    public class OrderModel
     {
         /// <summary>
         /// Идентификатор
         /// </summary>
-        public int Id { get; set; }
+        public int Number { get; set; }
         /// <summary>
         /// Артикль
         /// </summary>

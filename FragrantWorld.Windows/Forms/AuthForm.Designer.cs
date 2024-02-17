@@ -89,6 +89,7 @@
             // 
             textBoxPassword.Location = new Point(90, 59);
             textBoxPassword.Name = "textBoxPassword";
+            textBoxPassword.PasswordChar = '*';
             textBoxPassword.Size = new Size(193, 23);
             textBoxPassword.TabIndex = 6;
             // 
@@ -167,6 +168,7 @@
             textBoxCaptcha.Size = new Size(64, 23);
             textBoxCaptcha.TabIndex = 12;
             textBoxCaptcha.TextAlign = HorizontalAlignment.Center;
+            textBoxCaptcha.TextChanged += textBoxCaptcha_TextChanged;
             // 
             // groupBoxCapthca
             // 

@@ -1,5 +1,6 @@
 ﻿using FragrantWorld.Context;
 using FragrantWorld.Context.Models;
+using FragrantWorld.Windows.Forms;
 using FragrantWorld.Windows.UserControlls.Models;
 using System;
 using System.Collections.Generic;
@@ -51,8 +52,22 @@ namespace FragrantWorld.Windows.UserControlls
             if (CartModel.Amount > 1)
             {
                 CartModel.Amount -= 1;
+                ButtonBaseEvents();
             }
-            ButtonBaseEvents();
+            else
+            {
+                if (MessageBox.Show("Вы дейтсвительно хотите удалить этот товар из корзины?", "Удаление товара из корзины!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    using (var db = new FragrantWorldContext())
+                    {
+                        db.Carts.Remove(db.Carts.Where(x => x.Id ==CartModel.Id).First());
+                        db.SaveChanges();
+                    }
+                    CartForm Owner = this.FindForm() as CartForm;
+                    Owner.ShowCartItems();
+                }
+            }
+            
         }
 
         private void ButtonBaseEvents()
