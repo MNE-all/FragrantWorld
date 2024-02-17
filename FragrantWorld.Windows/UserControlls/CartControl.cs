@@ -57,7 +57,7 @@ namespace FragrantWorld.Windows.UserControlls
 
         private void ButtonBaseEvents()
         {
-            using(var db = new FragrantWorldContext())
+            using (var db = new FragrantWorldContext())
             {
                 var cart = db.Carts.Where(x => x.Id == CartModel.Id).First();
                 cart.Amount = CartModel.Amount;
@@ -66,7 +66,7 @@ namespace FragrantWorld.Windows.UserControlls
             }
 
             labelAmount.Text = CartModel.Amount.ToString();
-            labelTotalPrice.Text = (CartModel.Price * CartModel.Amount).ToString();
+            labelTotalPrice.Text = (CartModel.Price * (100 - (decimal)CartModel.CurrentDiscount) / 100  * CartModel.Amount).ToString();
         }
 
         private void CartControl_MouseEnter(object sender, EventArgs e)

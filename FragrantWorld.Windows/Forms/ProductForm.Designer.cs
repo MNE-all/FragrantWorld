@@ -39,6 +39,8 @@
             labelFullName = new Label();
             labelEnterAs = new Label();
             panel1 = new Panel();
+            textBoxNameFind = new TextBox();
+            label2 = new Label();
             panelControls.SuspendLayout();
             panelUser.SuspendLayout();
             panel1.SuspendLayout();
@@ -56,6 +58,8 @@
             // 
             // panelControls
             // 
+            panelControls.Controls.Add(label2);
+            panelControls.Controls.Add(textBoxNameFind);
             panelControls.Controls.Add(comboBoxDisountFilter);
             panelControls.Controls.Add(label1);
             panelControls.Controls.Add(panelUser);
@@ -68,15 +72,16 @@
             // comboBoxDisountFilter
             // 
             comboBoxDisountFilter.FormattingEnabled = true;
-            comboBoxDisountFilter.Location = new Point(293, 20);
+            comboBoxDisountFilter.Location = new Point(357, 20);
             comboBoxDisountFilter.Name = "comboBoxDisountFilter";
             comboBoxDisountFilter.Size = new Size(121, 23);
             comboBoxDisountFilter.TabIndex = 2;
+            comboBoxDisountFilter.SelectedIndexChanged += comboBoxDisountFilter_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(199, 23);
+            label1.Location = new Point(263, 23);
             label1.Name = "label1";
             label1.Size = new Size(91, 15);
             label1.TabIndex = 1;
@@ -146,6 +151,23 @@
             panel1.Size = new Size(834, 719);
             panel1.TabIndex = 2;
             // 
+            // textBoxNameFind
+            // 
+            textBoxNameFind.Location = new Point(12, 24);
+            textBoxNameFind.Name = "textBoxNameFind";
+            textBoxNameFind.Size = new Size(196, 23);
+            textBoxNameFind.TabIndex = 3;
+            textBoxNameFind.TextChanged += textBoxNameFind_TextChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 6);
+            label2.Name = "label2";
+            label2.Size = new Size(98, 15);
+            label2.TabIndex = 4;
+            label2.Text = "Поиск по имени";
+            // 
             // ProductForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -180,5 +202,7 @@
         private ComboBox comboBoxDisountFilter;
         private Label label1;
         private Button buttonCart;
+        private Label label2;
+        private TextBox textBoxNameFind;
     }
 }

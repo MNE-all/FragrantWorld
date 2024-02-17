@@ -150,7 +150,7 @@
             // labelDiscount
             // 
             labelDiscount.AutoSize = true;
-            labelDiscount.Location = new Point(444, 63);
+            labelDiscount.Location = new Point(444, 125);
             labelDiscount.Name = "labelDiscount";
             labelDiscount.Size = new Size(88, 15);
             labelDiscount.TabIndex = 0;

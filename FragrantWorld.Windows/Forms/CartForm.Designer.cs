@@ -30,15 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CartForm));
             panelControls = new Panel();
+            labelPickUpPoint = new Label();
+            comboBoxPickUpPoint = new ComboBox();
+            buttonMakeOrder = new Button();
             panelUser = new Panel();
             labelFullName = new Label();
             labelEnterAs = new Label();
             flowLayoutPanel = new FlowLayoutPanel();
-            buttonMakeOrder = new Button();
-            comboBoxPickUpPoint = new ComboBox();
-            labelPickUpPoint = new Label();
+            statusStrip = new StatusStrip();
+            toolStripStatusLabelTotalSum = new ToolStripStatusLabel();
             panelControls.SuspendLayout();
             panelUser.SuspendLayout();
+            statusStrip.SuspendLayout();
             SuspendLayout();
             // 
             // panelControls
@@ -52,6 +55,35 @@
             panelControls.Name = "panelControls";
             panelControls.Size = new Size(800, 62);
             panelControls.TabIndex = 2;
+            // 
+            // labelPickUpPoint
+            // 
+            labelPickUpPoint.AutoSize = true;
+            labelPickUpPoint.Location = new Point(332, 24);
+            labelPickUpPoint.Name = "labelPickUpPoint";
+            labelPickUpPoint.Size = new Size(87, 15);
+            labelPickUpPoint.TabIndex = 3;
+            labelPickUpPoint.Text = "Пункт выдачи:";
+            // 
+            // comboBoxPickUpPoint
+            // 
+            comboBoxPickUpPoint.FormattingEnabled = true;
+            comboBoxPickUpPoint.Location = new Point(425, 21);
+            comboBoxPickUpPoint.Name = "comboBoxPickUpPoint";
+            comboBoxPickUpPoint.Size = new Size(213, 23);
+            comboBoxPickUpPoint.TabIndex = 2;
+            comboBoxPickUpPoint.SelectedIndexChanged += comboBoxPickUpPoint_SelectedIndexChanged;
+            // 
+            // buttonMakeOrder
+            // 
+            buttonMakeOrder.Dock = DockStyle.Right;
+            buttonMakeOrder.Location = new Point(644, 0);
+            buttonMakeOrder.Name = "buttonMakeOrder";
+            buttonMakeOrder.Size = new Size(156, 62);
+            buttonMakeOrder.TabIndex = 1;
+            buttonMakeOrder.Text = "Оформить заказ";
+            buttonMakeOrder.UseVisualStyleBackColor = true;
+            buttonMakeOrder.Click += buttonMakeOrder_Click;
             // 
             // panelUser
             // 
@@ -89,49 +121,41 @@
             flowLayoutPanel.Size = new Size(800, 388);
             flowLayoutPanel.TabIndex = 3;
             // 
-            // buttonMakeOrder
+            // statusStrip
             // 
-            buttonMakeOrder.Dock = DockStyle.Right;
-            buttonMakeOrder.Location = new Point(644, 0);
-            buttonMakeOrder.Name = "buttonMakeOrder";
-            buttonMakeOrder.Size = new Size(156, 62);
-            buttonMakeOrder.TabIndex = 1;
-            buttonMakeOrder.Text = "Оформить заказ";
-            buttonMakeOrder.UseVisualStyleBackColor = true;
+            statusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelTotalSum });
+            statusStrip.Location = new Point(0, 428);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Size = new Size(800, 22);
+            statusStrip.TabIndex = 4;
+            statusStrip.Text = "Строка состояния";
             // 
-            // comboBoxPickUpPoint
+            // toolStripStatusLabelTotalSum
             // 
-            comboBoxPickUpPoint.FormattingEnabled = true;
-            comboBoxPickUpPoint.Location = new Point(425, 21);
-            comboBoxPickUpPoint.Name = "comboBoxPickUpPoint";
-            comboBoxPickUpPoint.Size = new Size(213, 23);
-            comboBoxPickUpPoint.TabIndex = 2;
-            // 
-            // labelPickUpPoint
-            // 
-            labelPickUpPoint.AutoSize = true;
-            labelPickUpPoint.Location = new Point(332, 24);
-            labelPickUpPoint.Name = "labelPickUpPoint";
-            labelPickUpPoint.Size = new Size(87, 15);
-            labelPickUpPoint.TabIndex = 3;
-            labelPickUpPoint.Text = "Пункт выдачи:";
+            toolStripStatusLabelTotalSum.Name = "toolStripStatusLabelTotalSum";
+            toolStripStatusLabelTotalSum.Size = new Size(78, 17);
+            toolStripStatusLabelTotalSum.Text = "Итого: 0 руб.";
             // 
             // CartForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(statusStrip);
             Controls.Add(flowLayoutPanel);
             Controls.Add(panelControls);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "CartForm";
             Text = "Корзина";
-            FormClosing += CartForm_FormClosing;
+            Paint += CartForm_Paint;
             panelControls.ResumeLayout(false);
             panelControls.PerformLayout();
             panelUser.ResumeLayout(false);
             panelUser.PerformLayout();
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -144,5 +168,7 @@
         private Label labelPickUpPoint;
         private ComboBox comboBoxPickUpPoint;
         private Button buttonMakeOrder;
+        private StatusStrip statusStrip;
+        private ToolStripStatusLabel toolStripStatusLabelTotalSum;
     }
 }

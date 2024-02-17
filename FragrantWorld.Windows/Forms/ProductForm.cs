@@ -8,6 +8,8 @@ namespace FragrantWorld.Windows
     public partial class ProductForm : Form
     {
         public User CurrentUser { get; set; }
+
+        public List<Product> Products = new List<Product>();
         public ProductForm()
         {
             CustomInit();
@@ -46,28 +48,39 @@ namespace FragrantWorld.Windows
         private void CustomInit()
         {
             InitializeComponent();
-
-            ContextMenuStrip productContextMenu = new ContextMenuStrip();
-            productContextMenu.Items.Add("Добавить к заказу");
-            productContextMenu.Items[0].Click += ProductAdd_Click;
-
             using (var db = new FragrantWorldContext())
             {
-                var products = db.Products.ToList();
-                foreach (var product in products)
-                {
-                    var productControl = new ProductControll(product);
-                    productControl.Width = flowLayoutPanel.Width;
-                    productControl.ContextMenuStrip = productContextMenu;
-
-                    flowLayoutPanel.Controls.Add(productControl);
-                }
+                Products = db.Products.ToList();
             }
+            ShowProducts();
+
+
 
             comboBoxDisountFilter.Items.Add("Все диапозоны");
             comboBoxDisountFilter.Items.Add("0-9,99%");
             comboBoxDisountFilter.Items.Add("10-14,99%");
             comboBoxDisountFilter.Items.Add("15% и более");
+            comboBoxDisountFilter.SelectedIndex = 0;
+
+        }
+
+        private void ShowProducts()
+        {
+            flowLayoutPanel.Controls.Clear();
+
+            ContextMenuStrip productContextMenu = new ContextMenuStrip();
+            productContextMenu.Items.Add("Добавить к заказу");
+            productContextMenu.Items[0].Click += ProductAdd_Click;
+
+
+            foreach (var product in Products)
+            {
+                var productControl = new ProductControll(product);
+                productControl.Width = flowLayoutPanel.Width;
+                productControl.ContextMenuStrip = productContextMenu;
+
+                flowLayoutPanel.Controls.Add(productControl);
+            }
 
         }
 
@@ -173,6 +186,44 @@ namespace FragrantWorld.Windows
                     buttonCart.Visible = false;
                 }
             }
+        }
+
+        private void comboBoxDisountFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilerProducts();
+        }
+
+        private void textBoxNameFind_TextChanged(object sender, EventArgs e)
+        {
+            FilerProducts();
+        }
+
+        private void FilerProducts()
+        {
+            using (var db = new FragrantWorldContext())
+            {
+                switch (comboBoxDisountFilter.SelectedItem)
+                {
+                    case "Все диапозоны":
+                        Products = db.Products.ToList();
+                        break;
+                    case "0-9,99%":
+                        Products = db.Products.Where(x => x.CurrentDiscount >= 0 && x.CurrentDiscount <= 9.99F).ToList();
+                        break;
+                    case "10-14,99%":
+                        Products = db.Products.Where(x => x.CurrentDiscount >= 10 && x.CurrentDiscount <= 14.99F).ToList();
+
+                        break;
+                    case "15% и более":
+                        Products = db.Products.Where(x => x.CurrentDiscount >= 15).ToList();
+                        break;
+                }
+            }
+            if (textBoxNameFind.Text != string.Empty)
+            {
+                Products = Products.Where(x => x.Name.Contains(textBoxNameFind.Text)).ToList();
+            }
+            ShowProducts();
         }
     }
 }

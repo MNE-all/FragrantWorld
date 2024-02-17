@@ -9,11 +9,13 @@ namespace FragrantWorld.Windows.Forms
     public partial class CartForm : Form
     {
         public User CurrentUser { get; set; }
+        public decimal TotalSum = 0;
         public CartForm(User user)
         {
             CurrentUser = user;
             InitializeComponent();
 
+            comboBoxPickUpPoint.Items.Add("Не выбрано");
             using (var db = new FragrantWorldContext())
             {
                 foreach (var pickUpPoint in db.PickUpPoints.ToList())
@@ -21,6 +23,7 @@ namespace FragrantWorld.Windows.Forms
                     comboBoxPickUpPoint.Items.Add(pickUpPoint);
                 }
             }
+            comboBoxPickUpPoint.SelectedIndex = 0;
 
             labelFullName.Text = CurrentUser.Surname + " " +
             CurrentUser.Name + " " +
@@ -32,6 +35,7 @@ namespace FragrantWorld.Windows.Forms
         private void ShowCartItems()
         {
             flowLayoutPanel.Controls.Clear();
+            TotalSum = 0;
 
             ContextMenuStrip cartContextMenu = new ContextMenuStrip();
             cartContextMenu.Items.Add("Удалить");
@@ -40,7 +44,7 @@ namespace FragrantWorld.Windows.Forms
             using (var db = new FragrantWorldContext())
             {
                 var carts = db.Carts.Where(x => x.ClientId == CurrentUser.Id).ToList();
-                if(carts.Count() > 0)
+                if (carts.Count() > 0 && comboBoxPickUpPoint.SelectedIndex != 0)
                 {
                     buttonMakeOrder.Enabled = true;
                 }
@@ -68,7 +72,10 @@ namespace FragrantWorld.Windows.Forms
                         StorageAmount = product.StorageAmount,
                         UnitOfMeasurement = product.UnitOfMeasurement,
                     });
+                    TotalSum += product.Price * (100 - (decimal)product.CurrentDiscount) / 100 * cart.Amount;
                 }
+
+                toolStripStatusLabelTotalSum.Text = "Итого: " + TotalSum.ToString() + " руб.";
 
                 foreach (var cartModel in cartModels)
                 {
@@ -93,10 +100,58 @@ namespace FragrantWorld.Windows.Forms
                 ShowCartItems();
             }
         }
-
-        private void CartForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void buttonMakeOrder_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            var code = new Random().Next(111, 999);
+            using (var db = new FragrantWorldContext())
+            {
+                var number = db.Orders.OrderBy(x => x.Number).Last().Number + 1;
+                var pickUpPoint = db.PickUpPoints.Where(x => x == comboBoxPickUpPoint.SelectedItem).First();
+                foreach (CartControl cartControl in flowLayoutPanel.Controls)
+                {
+                    var cart = db.Carts.Where(x => x.Id == cartControl.CartModel.Id).First();
+                    var order = new Order()
+                    {
+                        Amount = cartControl.CartModel.Amount,
+                        ClientId = cart.ClientId,
+                        ProductArticleNumber = cart.ProductArticleNumber,
+                        Number = number,
+                        PickUpPoint = pickUpPoint,
+                        OrderDate = DateTimeOffset.Now,
+                        Code = code,
+                        DeliveryDate = DateTimeOffset.Now.AddDays(3),
+                        IsActive = true,
+                    };
+                    db.Orders.Add(order);
+                    db.Carts.Remove(cart);
+                }
+                db.SaveChanges();
+                MessageBox.Show("Ваш заказ с номером " + number + " оформлен." +
+                    "Код для получения: " + code, "Оформление заказа");
+            }
+
+            ShowCartItems();
+        }
+
+        private void CartForm_Paint(object sender, PaintEventArgs e)
+        {
+            toolStripStatusLabelTotalSum.Text = "Итого: " + TotalSum.ToString() + " руб.";
+        }
+
+        private void comboBoxPickUpPoint_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (var db = new FragrantWorldContext())
+            {
+                var carts = db.Carts.Where(x => x.ClientId == CurrentUser.Id).ToList();
+                if (carts.Count() > 0 && comboBoxPickUpPoint.SelectedIndex != 0)
+                {
+                    buttonMakeOrder.Enabled = true;
+                }
+                else
+                {
+                    buttonMakeOrder.Enabled = false;
+                }
+            }
         }
     }
 }
