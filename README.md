@@ -104,7 +104,7 @@ erDiagram
         int StorageAmount
         string ImageURL
     }
-
+```
 
 ---
 Диаграмма последовательности для прецендента авторизация
