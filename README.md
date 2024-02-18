@@ -105,14 +105,22 @@ erDiagram
         string ImageURL
     }
 
-    Role ||--o{ User: is
-    User ||--o{ Order: is
-    User ||--o{ Cart: is
-    Product ||--o{ Order: is
-    Product ||--o{ Cart: is
-    PickIpPoint ||--o{ Order: is
 
-    UnitsOfMeasurement ||--o{ Product: is
-    ProductCategory ||--o{ Product: is
-    Manufacturer ||--o{ Product: is
-    Supplier ||--o{ Product: is
+---
+Диаграмма последовательности для прецендента авторизация
+---
+```mermaid
+sequenceDiagram
+actor U as User
+participant UI
+participant CB as Code Behind
+participant DB as Database
+U->>UI:ввод авторизационных данных
+UI->>CB:передача данных
+CB->>DB:поиск пользователя
+DB-->>CB:результат поиска
+CB->>CB:валидация
+CB->>UI:сообщение об успешности
+```
+
+
