@@ -104,6 +104,17 @@ erDiagram
         int StorageAmount
         string ImageURL
     }
+
+    Role ||--o{ User: is
+    User ||--o{ Order: is
+    User ||--o{ Cart: is
+    Product ||--o{ Order: is
+    Product ||--o{ Cart: is
+    PickIpPoint ||--o{ Order: is
+    UnitsOfMeasurement ||--o{ Product: is
+    ProductCategory ||--o{ Product: is
+    Manufacturer ||--o{ Product: is
+    Supplier ||--o{ Product: is
 ```
 
 ---
